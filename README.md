@@ -1,4 +1,4 @@
-# Ads App Starter Code
+# Events App Front End
 
-Starter code for the Mongo Session
-
+Backend live on heroku
+npm start to open react app

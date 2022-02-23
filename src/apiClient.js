@@ -72,14 +72,14 @@ export class ApiClient {
   }
 
   addEvent(name, location, date, price, info) {
-    return this.authenticatedCall("post",`${url}`, { name, location, date, price, info });
+    return this.authenticatedCall("post",`${url}event`, { name, location, date, price, info });
   }
 
   removeEvent(id) {
-    return this.authenticatedCall("delete", `${url}${id}`);
+    return this.authenticatedCall("delete", `${url}event/${id}`);
   }
 
   updateEvent(id, name, location, date, price, info) {
-    return this.authenticatedCall("put", `${url}${id}`, { name, location, date, price, info });
+    return this.authenticatedCall("put", `${url}event/${id}`, { name, location, date, price, info });
   }
 }

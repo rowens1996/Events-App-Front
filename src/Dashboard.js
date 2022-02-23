@@ -26,7 +26,10 @@ function Dashboard(props) {
       return (
         <tr key={current._id}>
           <td>{current.name}</td>
+          <td>{current.location}</td>
+          <td>{current.date}</td>
           <td>£{current.price}</td>
+          <td>{current.info}</td>
           <td>
             <button onClick={() => removeEvent(current._id)}> remove</button>
             <button onClick={() => updateEvent(current)}> update</button>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { FiTrash2 } from 'react-icons/fi';
 import { Container, Card, Button, CardImg } from "react-bootstrap";
+import "./App.css";
 import Add from "./Add";
 
 
@@ -27,23 +29,29 @@ function Dashboard(props) {
     return events.map((current) => {
       return (
         <div key={current.id}>
-      <Card className="otherCard" style={{ width: "18rem" }}>
-        <Card.Header as="h5">
+      <Card className="otherCard" style={{ width: "100%" }}>
+        <Card.Header as="h5" className="card-header">
           <Card.Title>
             {current.name}
+              <span className="float-right">{current.date}<br/>
+              Price: <span className="bold">£{current.price}</span>
+              </span>
           </Card.Title>
           <Card.Subtitle className="text-muted">
-            {current.date} {current.location} £{current.price}
+          {current.location}
           </Card.Subtitle>
         </Card.Header>
         <Card.Body>
           <Card.Text className="mb-1">
           {current.info}
           </Card.Text>
-          <Button onClick={() => removeEvent(current._id)} variant="primary">Delete</Button>
-          <Button onClick={() => updateEvent(current)} variant="primary">Update</Button>
+          <a className="card-trash">
+          <Button onClick={() => updateEvent(current)} variant="primary">Update</Button>&nbsp;&nbsp;
+          <Button onClick={() => removeEvent(current._id)} variant="danger"><FiTrash2 /></Button>
+          </a>
         </Card.Body>
       </Card>
+      <br/>
     </div>
       );
     });

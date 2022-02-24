@@ -46,6 +46,12 @@ function Login(props) {
           {" "}
           Login{" "}
         </Button>
+&nbsp;&nbsp;&nbsp;
+        <Button variant="outline-primary" type="" disabled={disabled}>
+          {" "}
+          Sign Up{" "}
+        </Button>
+
       </form>
     </div>
   );

@@ -3,7 +3,12 @@
 * {
   font-family: Raleway;
 }
-
+body {
+  background-color: #e0dddc;
+  opacity: 0.9;
+  background-image:  radial-gradient(#b231da 0.75px, transparent 0.75px), radial-gradient(#b231da 0.75px, #e0dddc 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0,15px 15px;}
 .App {
   text-align: center;
 }
@@ -68,4 +73,20 @@
 .login-header {
   font-weight: bold;
   font-size: 2em;
+}
+
+.card-header {
+}
+
+.card-trash {
+  float: right;
+  position: relative;
+}
+
+.float-right {
+  float: right;
+}
+
+.bold {
+  font-weight: bold;
 }

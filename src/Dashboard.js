@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container, Card, Button, CardImg } from "react-bootstrap";
 import Add from "./Add";
 
 function Dashboard(props) {
@@ -24,17 +25,25 @@ function Dashboard(props) {
   const buildrows = () => {
     return events.map((current) => {
       return (
-        <tr key={current._id}>
-          <td>{current.name}</td>
-          <td>{current.location}</td>
-          <td>{current.date}</td>
-          <td>£{current.price}</td>
-          <td>{current.info}</td>
-          <td>
-            <button onClick={() => removeEvent(current._id)}> remove</button>
-            <button onClick={() => updateEvent(current)}> update</button>
-          </td>
-        </tr>
+        <div key={current.id}>
+      <Card className="otherCard" style={{ width: "18rem" }}>
+        <Card.Header as="h5">
+          <Card.Title>
+            {current.name}
+          </Card.Title>
+          <Card.Subtitle className="text-muted">
+            {current.date} {current.location} £{current.price}
+          </Card.Subtitle>
+        </Card.Header>
+        <Card.Body>
+          <Card.Text className="mb-1">
+          {current.info}
+          </Card.Text>
+          <Button onClick={() => removeEvent(current._id)} variant="primary">Delete</Button>
+          <Button onClick={() => updateEvent(current)} variant="primary">Update</Button>
+        </Card.Body>
+      </Card>
+    </div>
       );
     });
   };
@@ -42,19 +51,10 @@ function Dashboard(props) {
   return (
     <>
       Dashboard
-      <br />
-      <table>
-        <thead>
-          <tr>
-            <th>Event Name</th>
-            <th>Location</th>
-            <th>Date</th>
-            <th>Price</th>
-            <th>Info</th>
-          </tr>
-        </thead>
-        <tbody>{buildrows()}</tbody>
-      </table>
+      <Container>
+        {buildrows()}
+        </Container> 
+  
       <br />
       <br />
       <Add

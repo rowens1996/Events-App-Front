@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import {
+  Button,
+  Container,
+} from "react-bootstrap";
+
 
 function Login(props) {
   const [disabled, cDisabled] = useState(false);
@@ -22,9 +29,9 @@ function Login(props) {
   };
 
   return (
-    <>
-      Login
-      <br />
+    <div className="login-child">
+      <span className="login-header">Hello</span>
+      <hr/>
       <form onSubmit={(e) => submitHandler(e)}>
         username
         <br />
@@ -35,12 +42,12 @@ function Login(props) {
         <input type="password" name="password" disabled={disabled} />
         <br />
         <br />
-        <button type="submit" disabled={disabled}>
+        <Button variant="outline-success" type="submit" disabled={disabled}>
           {" "}
-          Submit{" "}
-        </button>
+          Login{" "}
+        </Button>
       </form>
-    </>
+    </div>
   );
 }
 

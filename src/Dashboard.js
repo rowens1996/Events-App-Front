@@ -45,10 +45,11 @@ function Dashboard(props) {
           <Card.Text className="mb-1">
           {current.info}
           </Card.Text>
-          <a className="card-trash">
-          <Button onClick={() => updateEvent(current)} variant="primary">Update</Button>&nbsp;&nbsp;
-          <Button onClick={() => removeEvent(current._id)} variant="danger"><FiTrash2 /></Button>
-          </a>
+          <span className="card-trash">
+            <Button onClick={() => updateEvent(current)} variant="primary">Update</Button>
+              &nbsp;&nbsp;
+            <Button onClick={() => removeEvent(current._id)} variant="danger"><FiTrash2 /></Button>
+          </span>
         </Card.Body>
       </Card>
       <br/>

@@ -9,6 +9,8 @@ function Add(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    e.persist();
+    console.log(e.target.date.value);
     cDisabled(true);
     let result;
     if (props.currentEvent) {
@@ -64,7 +66,7 @@ function Add(props) {
                 <Form.Control
                   type="text"
                   defaultValue={props.currentEvent?.location}
-                  name="name"
+                  name="location"
                   disabled={disabled}
                 />
               </Form.Group>
@@ -72,6 +74,7 @@ function Add(props) {
               <Form.Group controlId="eventDate">
                 <Form.Label>Date</Form.Label>
                 <DatePicker
+                  name="date"
                   placeholderText="Click to select a date"
                   dateFormat="dd-MM-yyyy"
                   closeOnScroll={true}
@@ -86,7 +89,7 @@ function Add(props) {
                 <Form.Control
                   type="text"
                   defaultValue={props.currentEvent?.price}
-                  name="name"
+                  name="price"
                   disabled={disabled}
                 />
               </Form.Group>
@@ -94,7 +97,7 @@ function Add(props) {
               <Form.Group controlId="textInput">
                 <Form.Label>Info</Form.Label>
                 <Form.Control
-                  name="post"
+                  name="info"
                   as="textarea"
                   rows={5}
                   defaultValue={props.currentEvent?.info}

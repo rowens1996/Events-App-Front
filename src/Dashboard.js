@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FiTrash2 } from 'react-icons/fi';
+import { FiTrash2 } from "react-icons/fi";
 import { Container, Card, Button, CardImg } from "react-bootstrap";
 import "./App.css";
 import Add from "./Add";
@@ -10,7 +10,12 @@ function Dashboard(props) {
 
   const [show, SetShow] = useState(false);
 
-  const handleShow = () => SetShow(true);
+  const handleShow = (add) => {
+    if (add === true) {
+      cCurrent(undefined);
+    }
+    SetShow(true);
+  };
   const handleClose = () => SetShow(false);
 
   const refreshList = () => {
@@ -34,63 +39,71 @@ function Dashboard(props) {
     return events.map((current) => {
       return (
         <div key={current.id}>
-
-      <Card className="otherCard" style={{ width: "100%" }}>
-        <Card.Header as="h5" className="card-header">
-          <Card.Title>
-            {current.name}
-              <span className="float-right">{current.date}<br/>
-              Price: <span className="bold">£{current.price}</span>
+          <Card className="otherCard" style={{ width: "100%" }}>
+            <Card.Header as="h5" className="card-header">
+              <Card.Title>
+                {current.name}
+                <span className="float-right">
+                  {current.date}
+                  <br />
+                  Price: <span className="bold">£{current.price}</span>
+                </span>
+              </Card.Title>
+              <Card.Subtitle className="text-muted">
+                {current.location}
+              </Card.Subtitle>
+            </Card.Header>
+            <Card.Body>
+              <Card.Text className="mb-1">{current.info}</Card.Text>
+              <span className="card-trash">
+                <Button onClick={() => updateEvent(current)} variant="primary">
+                  Update
+                </Button>
+                &nbsp;&nbsp;
+                <Button
+                  onClick={() => removeEvent(current._id)}
+                  variant="danger"
+                >
+                  <FiTrash2 />
+                </Button>
               </span>
-          </Card.Title>
-          <Card.Subtitle className="text-muted">
-          {current.location}
-          </Card.Subtitle>
-        </Card.Header>
-        <Card.Body>
-          <Card.Text className="mb-1">
-          {current.info}
-          </Card.Text>
-          <span className="card-trash">
-            <Button onClick={() => updateEvent(current)} variant="primary">Update</Button>
-              &nbsp;&nbsp;
-            <Button onClick={() => removeEvent(current._id)} variant="danger"><FiTrash2 /></Button>
-          </span>
-        </Card.Body>
-      </Card>
-      <br/>
-    </div>
+            </Card.Body>
+          </Card>
+          <br />
+        </div>
       );
     });
   };
 
   return (
     <>
-    <br/>
-    <Container>
-    <Card className="otherCard" style={{ width: "100%" }}>
-        <Card.Header as="h5" className="card-header">
-          <Card.Title>
-            Add Your Event Here
-              <span className="float-right">When is it?<br/>
-              Price: <span className="bold">£</span>
+      <br />
+      <Container>
+        <Card className="otherCard" style={{ width: "100%" }}>
+          <Card.Header as="h5" className="card-header">
+            <Card.Title>
+              Add Your Event Here
+              <span className="float-right">
+                When is it?
+                <br />
+                Price: <span className="bold">£</span>
               </span>
-          </Card.Title>
-          <Card.Subtitle className="text-muted">
-          Where is it?
-          </Card.Subtitle>
-        </Card.Header>
-        <Card.Body>
-          <Card.Text className="mb-1">
-          Tells us more about your event... 
-          </Card.Text>
-          <span className="card-trash">
-            <Button onClick={() => handleShow()} variant="primary">Add Event</Button>
-          </span>
-        </Card.Body>
-
-      </Card></Container>
-      <br/>
+            </Card.Title>
+            <Card.Subtitle className="text-muted">Where is it?</Card.Subtitle>
+          </Card.Header>
+          <Card.Body>
+            <Card.Text className="mb-1">
+              Tells us more about your event...
+            </Card.Text>
+            <span className="card-trash">
+              <Button onClick={() => handleShow(true)} variant="primary">
+                Add Event
+              </Button>
+            </span>
+          </Card.Body>
+        </Card>
+      </Container>
+      <br />
       <Container>{buildrows()}</Container>
       <br />
       <Add

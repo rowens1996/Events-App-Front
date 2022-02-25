@@ -47,6 +47,7 @@ export class ApiClient {
     });
   }
 
+
   addNewUser(username, password) {
     return this.authenticatedCall("post", `${url}signup`, { username, password});
   };
@@ -72,7 +73,13 @@ export class ApiClient {
   }
 
   addEvent(name, location, date, price, info) {
-    return this.authenticatedCall("post",`${url}event`, { name, location, date, price, info });
+    return this.authenticatedCall("post", `${url}event`, {
+      name,
+      location,
+      date,
+      price,
+      info,
+    });
   }
 
   removeEvent(id) {
@@ -80,6 +87,12 @@ export class ApiClient {
   }
 
   updateEvent(id, name, location, date, price, info) {
-    return this.authenticatedCall("put", `${url}event/${id}`, { name, location, date, price, info });
+    return this.authenticatedCall("put", `${url}event/${id}`, {
+      name,
+      location,
+      date,
+      price,
+      info,
+    });
   }
 }

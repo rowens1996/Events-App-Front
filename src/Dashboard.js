@@ -14,6 +14,7 @@ import {
   Container,
 } from "react-bootstrap";
 
+
 function Dashboard(props) {
   const [events, cEvents] = useState([]);
   const [current, cCurrent] = useState(undefined);
@@ -25,6 +26,16 @@ function Dashboard(props) {
     changeToken("");
   };
 
+  const [show, SetShow] = useState(false);
+
+  const handleShow = (add) => {
+    if (add === true) {
+      cCurrent(undefined);
+    }
+    SetShow(true);
+  };
+  const handleClose = () => SetShow(false);
+
   const refreshList = () => {
     props.client.getAllEvents().then((response) => cEvents(response.data));
   };
@@ -35,6 +46,7 @@ function Dashboard(props) {
 
   const updateEvent = (event) => {
     cCurrent(event);
+    handleShow();
   };
 
   useEffect(() => {
@@ -45,31 +57,38 @@ function Dashboard(props) {
     return events.map((current) => {
       return (
         <div key={current.id}>
-      <Card className="otherCard" style={{ width: "100%" }}>
-        <Card.Header as="h5" className="card-header">
-          <Card.Title>
-            {current.name}
-              <span className="float-right">{current.date}<br/>
-              Price: <span className="bold">£{current.price}</span>
+          <Card className="otherCard" style={{ width: "100%" }}>
+            <Card.Header as="h5" className="card-header">
+              <Card.Title>
+                {current.name}
+                <span className="float-right">
+                  {current.date}
+                  <br />
+                  Price: <span className="bold">£{current.price}</span>
+                </span>
+              </Card.Title>
+              <Card.Subtitle className="text-muted">
+                {current.location}
+              </Card.Subtitle>
+            </Card.Header>
+            <Card.Body>
+              <Card.Text className="mb-1">{current.info}</Card.Text>
+              <span className="card-trash">
+                <Button onClick={() => updateEvent(current)} variant="primary">
+                  Update
+                </Button>
+                &nbsp;&nbsp;
+                <Button
+                  onClick={() => removeEvent(current._id)}
+                  variant="danger"
+                >
+                  <FiTrash2 />
+                </Button>
               </span>
-          </Card.Title>
-          <Card.Subtitle className="text-muted">
-          {current.location}
-          </Card.Subtitle>
-        </Card.Header>
-        <Card.Body>
-          <Card.Text className="mb-1">
-          {current.info}
-          </Card.Text>
-          <span className="card-trash">
-            <Button onClick={() => updateEvent(current)} variant="primary">Update</Button>
-              &nbsp;&nbsp;
-            <Button onClick={() => removeEvent(current._id)} variant="danger"><FiTrash2 /></Button>
-          </span>
-        </Card.Body>
-      </Card>
-      <br/>
-    </div>
+            </Card.Body>
+          </Card>
+          <br />
+        </div>
       );
     });
   };
@@ -101,15 +120,41 @@ function Dashboard(props) {
         </Container>
       </Navbar>
 
-      Dashboard
-      <Container>
-        {buildrows()}
-        </Container> 
-  
       <br />
+
+      <Container>
+        <Card className="otherCard" style={{ width: "100%" }}>
+          <Card.Header as="h5" className="card-header">
+            <Card.Title>
+              Add Your Event Here
+              <span className="float-right">
+                When is it?
+                <br />
+                Price: <span className="bold">£</span>
+              </span>
+            </Card.Title>
+            <Card.Subtitle className="text-muted">Where is it?</Card.Subtitle>
+          </Card.Header>
+          <Card.Body>
+            <Card.Text className="mb-1">
+              Tells us more about your event...
+            </Card.Text>
+            <span className="card-trash">
+              <Button onClick={() => handleShow(true)} variant="primary">
+                Add Event
+              </Button>
+            </span>
+          </Card.Body>
+        </Card>
+      </Container>
+      <br />
+      <Container>{buildrows()}</Container>
       <br />
       <Add
         client={props.client}
+        show={show}
+        handleClose={handleClose}
+        handleShow={handleShow}
         refreshList={() => {
           refreshList();
           cCurrent(undefined);

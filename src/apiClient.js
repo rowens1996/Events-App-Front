@@ -49,7 +49,7 @@ export class ApiClient {
 
   addNewUser() {
     return this.authenticatedCall("post", `${url}signup`);
-  };
+  }
 
   getAllEvents() {
     return this.authenticatedCall("get", `${url}event`);
@@ -72,7 +72,13 @@ export class ApiClient {
   }
 
   addEvent(name, location, date, price, info) {
-    return this.authenticatedCall("post",`${url}event`, { name, location, date, price, info });
+    return this.authenticatedCall("post", `${url}event`, {
+      name,
+      location,
+      date,
+      price,
+      info,
+    });
   }
 
   removeEvent(id) {
@@ -80,6 +86,12 @@ export class ApiClient {
   }
 
   updateEvent(id, name, location, date, price, info) {
-    return this.authenticatedCall("put", `${url}event/${id}`, { name, location, date, price, info });
+    return this.authenticatedCall("put", `${url}event/${id}`, {
+      name,
+      location,
+      date,
+      price,
+      info,
+    });
   }
 }

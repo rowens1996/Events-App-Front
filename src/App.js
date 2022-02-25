@@ -4,6 +4,7 @@ import { ApiClient } from "./apiClient";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./Login";
+import { RiLogoutBoxRFill } from 'react-icons/ri';
 import "./App.css";
 import {
   Navbar,
@@ -20,7 +21,7 @@ function App() {
   const [token, changeToken] = useState(window.localStorage.getItem("token"));
 
   const logout = () => {
-    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("token")
     changeToken("");
   };
 
@@ -42,8 +43,10 @@ function App() {
               className="me-auto my-2 my-lg-0"
               style={{ maxHeight: "100px" }}
               navbarScroll
-            ></Nav>
-            <Nav></Nav>
+            >
+            </Nav>
+            <Nav.Link href="#" onClick={logout} style={{ color: "rgba(0,0,0,.9)" }}>Logout <RiLogoutBoxRFill /></Nav.Link>
+
             <Form className="d-flex">
               <FormControl
                 type="search"

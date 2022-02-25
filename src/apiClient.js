@@ -47,8 +47,8 @@ export class ApiClient {
     });
   }
 
-  addNewUser() {
-    return this.authenticatedCall("post", `${url}signup`);
+  addNewUser(username, password) {
+    return this.authenticatedCall("post", `${url}signup`, { username, password});
   };
 
   getAllEvents() {

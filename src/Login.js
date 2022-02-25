@@ -28,6 +28,24 @@ function Login(props) {
       });
   };
 
+  const signupHandler = (e) => {
+    e.preventDefault();
+    console.log(props);
+    console.log(e);
+    props.client
+      .addNewUser(e.target.username.value, e.target.password.value)
+      .then((response) => {
+        cDisabled(false);
+        // props.loggedIn(response.data.token);
+      })
+      .catch((err) => {
+        alert("an error has occurred");
+        console.log(err);
+        cDisabled(false);
+      });
+
+  }
+
   return (
     <div className="login-child">
       <span className="login-header">Hello</span>
@@ -46,6 +64,12 @@ function Login(props) {
           {" "}
           Login{" "}
         </Button>
+&nbsp;&nbsp;&nbsp;
+        <Button variant="outline-primary" onClick={(e) => signupHandler(e)} type="" disabled={disabled}>
+          {" "}
+          Sign Up{" "}
+        </Button>
+
       </form>
     </div>
   );

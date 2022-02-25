@@ -4,10 +4,14 @@ import { Container, Card, Button, CardImg } from "react-bootstrap";
 import "./App.css";
 import Add from "./Add";
 
-
 function Dashboard(props) {
   const [events, cEvents] = useState([]);
   const [current, cCurrent] = useState(undefined);
+
+  const [show, SetShow] = useState(false);
+
+  const handleShow = () => SetShow(true);
+  const handleClose = () => SetShow(false);
 
   const refreshList = () => {
     props.client.getAllEvents().then((response) => cEvents(response.data));
@@ -19,6 +23,7 @@ function Dashboard(props) {
 
   const updateEvent = (event) => {
     cCurrent(event);
+    handleShow();
   };
 
   useEffect(() => {
@@ -29,6 +34,7 @@ function Dashboard(props) {
     return events.map((current) => {
       return (
         <div key={current.id}>
+
       <Card className="otherCard" style={{ width: "100%" }}>
         <Card.Header as="h5" className="card-header">
           <Card.Title>
@@ -61,14 +67,14 @@ function Dashboard(props) {
   return (
     <>
       Dashboard
-      <Container>
-        {buildrows()}
-        </Container> 
-  
-      <br />
+      <Button onClick={() => handleShow()}>Add Event</Button>
+      <Container>{buildrows()}</Container>
       <br />
       <Add
         client={props.client}
+        show={show}
+        handleClose={handleClose}
+        handleShow={handleShow}
         refreshList={() => {
           refreshList();
           cCurrent(undefined);

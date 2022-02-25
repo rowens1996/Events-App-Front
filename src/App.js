@@ -14,17 +14,19 @@ import {
   FormControl,
   Button,
   Container,
+  NavLink,
 } from "react-bootstrap";
 
 function App() {
   const [token, changeToken] = useState(window.localStorage.getItem("token"));
+
   const logout = () => {
     window.localStorage.removeItem("token")
     changeToken("");
   };
 
   const loggedIn = (newToken) => {
-    window.localStorage.setItem("token", newToken)
+    window.localStorage.setItem("token", newToken);
     changeToken(newToken);
   };
 
@@ -34,7 +36,7 @@ function App() {
     <>
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Events App</Navbar.Brand>
+          <Navbar.Brand>Events App</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -44,6 +46,7 @@ function App() {
             >
             </Nav>
             <Nav.Link href="#" onClick={logout} style={{ color: "rgba(0,0,0,.9)" }}>Logout <RiLogoutBoxRFill /></Nav.Link>
+
             <Form className="d-flex">
               <FormControl
                 type="search"

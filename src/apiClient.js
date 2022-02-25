@@ -29,7 +29,7 @@ export class ApiClient {
       },
       data,
     }).catch((error) => {
-      if (error.response.status == 403) {
+      if (error.response.status === 403) {
         this.logoutHandler();
         return Promise.reject;
       } else {

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { datepicker } from "js-datepicker";
 
 function Add(props) {
   const [disabled, cDisabled] = useState(false);

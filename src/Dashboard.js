@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { FiTrash2 } from 'react-icons/fi';
-import { Container, Card, Button, CardImg } from "react-bootstrap";
 import "./App.css";
 import Add from "./Add";
-
+import { RiLogoutBoxRFill } from 'react-icons/ri';
+import {
+  Navbar,
+  Card,
+  Nav,
+  Form,
+  FormControl,
+  Button,
+  Container,
+} from "react-bootstrap";
 
 function Dashboard(props) {
   const [events, cEvents] = useState([]);
   const [current, cCurrent] = useState(undefined);
+  const [token, changeToken] = useState(window.localStorage.getItem("token"));
+
+  const logout = () => {
+    console.log(token)
+    window.localStorage.removeItem("token")
+    changeToken("");
+  };
 
   const refreshList = () => {
     props.client.getAllEvents().then((response) => cEvents(response.data));
@@ -60,6 +76,31 @@ function Dashboard(props) {
 
   return (
     <>
+          <Navbar bg="light" expand="lg">
+        <Container fluid>
+          <Navbar.Brand href="#">Events App</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            >
+            </Nav>
+            <Nav.Link onClick={logout} href="#" style={{ color: "rgba(0,0,0,.9)" }}>Logout <RiLogoutBoxRFill /></Nav.Link>
+            <Form className="d-flex">
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
       Dashboard
       <Container>
         {buildrows()}

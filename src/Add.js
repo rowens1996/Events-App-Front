@@ -49,7 +49,6 @@ function Add(props) {
       <Form onSubmit={(e) => submitHandler(e)} id="addForm">
         <Modal.Body>
           <Container id="formContainer">
-            <Form onSubmit={(e) => submitHandler(e)} id="addForm">
               <Form.Group controlId="eventName">
                 <Form.Label>Event Name</Form.Label>
                 <Form.Control
@@ -71,7 +70,7 @@ function Add(props) {
               </Form.Group>
 
               <Form.Group controlId="eventDate">
-                <Form.Label>Location</Form.Label>
+                <Form.Label>Date</Form.Label>
                 <DatePicker
                   placeholderText="Click to select a date"
                   dateFormat="dd-MM-yyyy"
@@ -110,7 +109,7 @@ function Add(props) {
               >
                 Submit
               </Button>
-            </Form>
+           
           </Container>
         </Modal.Body>
       </Form>

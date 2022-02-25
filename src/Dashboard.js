@@ -66,8 +66,31 @@ function Dashboard(props) {
 
   return (
     <>
-      Dashboard
-      <Button onClick={() => handleShow()}>Add Event</Button>
+    <br/>
+    <Container>
+    <Card className="otherCard" style={{ width: "100%" }}>
+        <Card.Header as="h5" className="card-header">
+          <Card.Title>
+            Add Your Event Here
+              <span className="float-right">When is it?<br/>
+              Price: <span className="bold">£</span>
+              </span>
+          </Card.Title>
+          <Card.Subtitle className="text-muted">
+          Where is it?
+          </Card.Subtitle>
+        </Card.Header>
+        <Card.Body>
+          <Card.Text className="mb-1">
+          Tells us more about your event... 
+          </Card.Text>
+          <span className="card-trash">
+            <Button onClick={() => handleShow()} variant="primary">Add Event</Button>
+          </span>
+        </Card.Body>
+
+      </Card></Container>
+      <br/>
       <Container>{buildrows()}</Container>
       <br />
       <Add
